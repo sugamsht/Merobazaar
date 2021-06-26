@@ -1,27 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { NativeModules, View } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { View, Platform, StyleSheet, SafeAreaView, StatusBar } from 'react-native';
 import WelcomeScreen from './screens/WelcomeScreen';
 import ViewImageScreen from './screens/ViewImageScreen';
 import Styling from './practice/Styling';
 import Card from './components/Card';
 import ListingDetailsScreen from './screens/ListingDetailsScreen';
+import MessagesScreen from './screens/MessagesScreen';
+import Screen from './components/Screen';
+import Icon from './components/Icon';
+import ListItem from './components/ListItem';
+import AccountScreen from './screens/AccountScreen';
+import ListingsScreen from './screens/ListingsScreen';
 
-
-
-const { StatusBarManager } = NativeModules;
 
 
 export default function App() {
   return (
-    <ViewImageScreen />
+    <ListingsScreen />
+
+    // <View style={styles.container}>
+    //   <AccountScreen />
+    // </View>
   );
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     //for notch in android
-//     paddingTop: Platform.OS === 'android' ? StatusBarManager.HEIGHT : 0,
-//   },
-// });
+const styles = StyleSheet.create({
+  container: {
+    //for notch in android
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+    flex: 1
+  },
+});

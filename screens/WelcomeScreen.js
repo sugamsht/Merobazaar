@@ -23,15 +23,11 @@ function WelcomeScreen(props) {
                 <AppButton title='Login' onPress={() => console.log('tapped Login')} color='primary' />
                 <AppButton title='Register' onPress={() => console.log('tapped Register')} color='secondary' />
             </View>
-
-
-
         </ImageBackground>
     );
 }
 const styles = StyleSheet.create({
     background: {
-        //for notch in android
         flex: 1,
         alignItems: 'center',
         justifyContent: 'flex-end',
