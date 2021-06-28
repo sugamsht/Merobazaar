@@ -3,7 +3,7 @@ export default {
     secondary: 'aquamarine',
     text: 'black',
     white: 'white',
-    listing: 'grey',
+    medium: 'grey',
     light: '#d3d3d3',
     danger: '#ff5252',
 }

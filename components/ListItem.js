@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         marginLeft: 0,
     },
     subTitle: {
-        color: colors.listing,
+        color: colors.medium,
         fontSize: 20
     },
     title: {
