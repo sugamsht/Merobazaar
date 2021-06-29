@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Image, StyleSheet, TouchableHighlight } from 'react-native';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+
 import AppText from './AppText';
 import colors from '../config/colors';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { MaterialIcons } from '@expo/vector-icons';
 
 function ListItem({ title, subTitle, image, IconComponent, onPress, renderRightActions }) {
     return (
@@ -21,6 +23,7 @@ function ListItem({ title, subTitle, image, IconComponent, onPress, renderRightA
                             {subTitle}
                         </AppText>}
                     </View>
+                    <MaterialIcons name="chevron-right" size={24} color="black" />
                 </View>
             </TouchableHighlight>
         </Swipeable>
