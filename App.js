@@ -1,6 +1,12 @@
 // import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
-import { View, Platform, StyleSheet, SafeAreaView, StatusBar, TextInput, Text, Switch, Image, TouchableHighlight, Alert } from 'react-native';
+import React from 'react';
+
+import { View, Text, Platform, StyleSheet, StatusBar, Button, Animated } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 
 import WelcomeScreen from './screens/WelcomeScreen';
 import ViewImageScreen from './screens/ViewImageScreen';
@@ -12,27 +18,37 @@ import ListingsScreen from './screens/ListingsScreen';
 import ListingEditScreen from './screens/ListingEditScreen';
 
 import Screen from './components/Screen';
-import Card from './components/Card';
-import Icon from './components/Icon';
-import AppTextInput from './components/AppTextInput';
-
-import * as ImagePicker from 'expo-image-picker';
 import AppButton from './components/AppButton';
-import ImageInput from './components/ImageInput';
-import ImageInputList from './components/lists/ImageInputList';
+import AuthNavigator from './navigation/AuthNavigator';
+import NavigationTheme from './navigation/NavigationTheme';
+import AppNavigator from './navigation/AppNavigator';
 
+
+const Tab = createBottomTabNavigator();
+const TabNavigator = () => (
+  <Tab.Navigator
+    tabBarOptions={{
+      activeBackgroundColor: 'tomato',
+      activeTintColor: 'white',
+      inactiveBackgroundColor: '#eee',
+      inactiveTintColor: 'black',
+      labelStyle: {
+        fontSize: 15,
+      },
+    }}
+  >
+    <Tab.Screen name="Feed" component={FeedNavigator} options={{ tabBarIcon: ({ size, color }) => <MaterialCommunityIcons name="home" size={size} color={color} /> }} />
+    <Tab.Screen name="add" component={ListingEditScreen} options={{ tabBarIcon: ({ size, color }) => <MaterialCommunityIcons style={{ marginBottom: 20 }} name="plus-circle-outline" size={size * 3} color={color} /> }} />
+    <Tab.Screen name="Account" component={AccountScreen} options={{ tabBarIcon: ({ size, color }) => <MaterialCommunityIcons name="account" size={size} color={color} /> }} />
+  </Tab.Navigator>
+)
 
 export default function App() {
 
   return (
-    <ListingEditScreen />
+    <NavigationContainer theme={NavigationTheme}>
+      <AppNavigator />
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    //for notch in android
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-    flex: 1
-  },
-});
