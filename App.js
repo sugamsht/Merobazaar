@@ -1,34 +1,54 @@
 // import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { View, Platform, StyleSheet, SafeAreaView, StatusBar, TextInput, Text, Switch } from 'react-native';
+import React from 'react';
+
+import { View, Text, Platform, StyleSheet, StatusBar, Button, Animated } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+
 import WelcomeScreen from './screens/WelcomeScreen';
 import ViewImageScreen from './screens/ViewImageScreen';
-import Styling from './practice/Styling';
-import Card from './components/Card';
-import ListingDetailsScreen from './screens/ListingDetailsScreen';
 import MessagesScreen from './screens/MessagesScreen';
-import Screen from './components/Screen';
-import Icon from './components/Icon';
-import ListItem from './components/ListItem';
+import ListingDetailsScreen from './screens/ListingDetailsScreen';
 import AccountScreen from './screens/AccountScreen';
-import ListingsScreen from './screens/ListingsScreen';
-import AppTextInput from './components/AppTextInput';
-import AppPicker from './components/AppPicker';
 import LoginScreen from './screens/LoginScreen';
+import ListingsScreen from './screens/ListingsScreen';
+import ListingEditScreen from './screens/ListingEditScreen';
 
+import Screen from './components/Screen';
+import AppButton from './components/AppButton';
+import AuthNavigator from './navigation/AuthNavigator';
+import NavigationTheme from './navigation/NavigationTheme';
+import AppNavigator from './navigation/AppNavigator';
+
+
+const Tab = createBottomTabNavigator();
+const TabNavigator = () => (
+  <Tab.Navigator
+    tabBarOptions={{
+      activeBackgroundColor: 'tomato',
+      activeTintColor: 'white',
+      inactiveBackgroundColor: '#eee',
+      inactiveTintColor: 'black',
+      labelStyle: {
+        fontSize: 15,
+      },
+    }}
+  >
+    <Tab.Screen name="Feed" component={FeedNavigator} options={{ tabBarIcon: ({ size, color }) => <MaterialCommunityIcons name="home" size={size} color={color} /> }} />
+    <Tab.Screen name="add" component={ListingEditScreen} options={{ tabBarIcon: ({ size, color }) => <MaterialCommunityIcons style={{ marginBottom: 20 }} name="plus-circle-outline" size={size * 3} color={color} /> }} />
+    <Tab.Screen name="Account" component={AccountScreen} options={{ tabBarIcon: ({ size, color }) => <MaterialCommunityIcons name="account" size={size} color={color} /> }} />
+  </Tab.Navigator>
+)
 
 export default function App() {
 
   return (
-    <LoginScreen />
-
+    <NavigationContainer theme={NavigationTheme}>
+      <AppNavigator />
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    //for notch in android
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-    flex: 1
-  },
-});

@@ -6,4 +6,5 @@ export default {
     medium: 'grey',
     light: '#d3d3d3',
     danger: '#ff5252',
+    dark: 'black'
 }
