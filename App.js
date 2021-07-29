@@ -1,27 +1,28 @@
 // import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 
-import { View, Text, Platform, StyleSheet, StatusBar, Button, Animated } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
+// import { View, Text, Platform, StyleSheet, StatusBar, Button, Animated } from 'react-native';
+// import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
-import WelcomeScreen from './screens/WelcomeScreen';
-import ViewImageScreen from './screens/ViewImageScreen';
-import MessagesScreen from './screens/MessagesScreen';
-import ListingDetailsScreen from './screens/ListingDetailsScreen';
+// import WelcomeScreen from './screens/WelcomeScreen';
+// import ViewImageScreen from './screens/ViewImageScreen';
+// import MessagesScreen from './screens/MessagesScreen';
+// import ListingDetailsScreen from './screens/ListingDetailsScreen';
+// import LoginScreen from './screens/LoginScreen';
+// import ListingsScreen from './screens/ListingsScreen';
 import AccountScreen from './screens/AccountScreen';
-import LoginScreen from './screens/LoginScreen';
-import ListingsScreen from './screens/ListingsScreen';
 import ListingEditScreen from './screens/ListingEditScreen';
 
-import Screen from './components/Screen';
-import AppButton from './components/AppButton';
-import AuthNavigator from './navigation/AuthNavigator';
+// import Screen from './components/Screen';
+// import AppButton from './components/AppButton';
+// import AuthNavigator from './navigation/AuthNavigator';
 import NavigationTheme from './navigation/NavigationTheme';
 import AppNavigator from './navigation/AppNavigator';
+import OfflineNotice from './components/OfflineNotice';
 
 
 const Tab = createBottomTabNavigator();
@@ -46,9 +47,12 @@ const TabNavigator = () => (
 export default function App() {
 
   return (
-    <NavigationContainer theme={NavigationTheme}>
-      <AppNavigator />
-    </NavigationContainer>
+    <>
+      <OfflineNotice />
+      <NavigationContainer theme={NavigationTheme}>
+        <AppNavigator />
+      </NavigationContainer>
+    </>
   );
 }
 

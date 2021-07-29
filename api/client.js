@@ -1,11 +1,24 @@
 // showLastCommitMessageForThisLibrary.js
 import { create } from 'apisauce'
+import cache from '../utility/cache';
 
 // define the api
 const apiClient = create({
     baseURL: 'http://192.168.1.65:9000/api',
 });
 
+const get = apiClient.get;
+apiClient.get = async (url, params, axiosConfig) => {
+    const response = await get(url, params, axiosConfig);
 
-export default apiClient;[]
+    if (response.ok) {
+        cache.store(url, response.data);
+        return response;
+    }
+
+    const data = await cache.get(url);
+    return data ? { ok: true, data } : response;
+};
+
+export default apiClient;
 
