@@ -22,25 +22,27 @@ function ListingsScreen({ navigation }) {
     }, [])
 
     return (
-        <Screen style={styles.screen}>
-            {error && <>
-                <AppText> Couldn't retrieve the data. Please check your internet connection and reload. </AppText>
-                <AppButton title="Retry" onPress={loadListings} ></AppButton>
-            </>}
+        <>
             <ActivityIndicator visible={loading} />
-            <FlatList
-                data={listings}
-                keyExtractor={listing => listing.id.toString()}
-                renderItem={({ item }) =>
-                    <Card
-                        title={item.title}
-                        subTitle={item.price}
-                        imageUrl={item.images[0].url}
-                        onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
-                    />
-                }
-            />
-        </Screen>
+            <Screen style={styles.screen}>
+                {error && <>
+                    <AppText> Couldn't retrieve the data. Please check your internet connection and reload. </AppText>
+                    <AppButton title="Retry" onPress={loadListings} ></AppButton>
+                </>}
+                <FlatList
+                    data={listings}
+                    keyExtractor={listing => listing.id.toString()}
+                    renderItem={({ item }) =>
+                        <Card
+                            title={item.title}
+                            subTitle={item.price}
+                            imageUrl={item.images[0].url}
+                            onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
+                        />
+                    }
+                />
+            </Screen>
+        </>
     );
 }
 

@@ -1,9 +1,10 @@
 // import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import AppLoading from 'expo-app-loading';
 
 // import { View, Text, Platform, StyleSheet, StatusBar, Button, Animated } from 'react-native';
 // import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -19,10 +20,12 @@ import ListingEditScreen from './screens/ListingEditScreen';
 
 // import Screen from './components/Screen';
 // import AppButton from './components/AppButton';
-// import AuthNavigator from './navigation/AuthNavigator';
 import NavigationTheme from './navigation/NavigationTheme';
 import AppNavigator from './navigation/AppNavigator';
 import OfflineNotice from './components/OfflineNotice';
+import AuthNavigator from './navigation/AuthNavigator';
+import AuthContext from './auth/context';
+import authStorage from './auth/storage';
 
 
 const Tab = createBottomTabNavigator();
@@ -46,13 +49,24 @@ const TabNavigator = () => (
 
 export default function App() {
 
+  const [user, setUser] = useState();
+  const [isReady, setIsReady] = useState(false);
+
+  const restoreUser = async () => {
+    const user = await authStorage.getUser();
+    if (user) setUser(user);
+  }
+
+  if (!isReady)
+    return <AppLoading startAsync={restoreUser} onFinish={() => setIsReady(true)} onError={console.warn} />
+
   return (
-    <>
+    <AuthContext.Provider value={{ user, setUser }}>
       <OfflineNotice />
       <NavigationContainer theme={NavigationTheme}>
-        <AppNavigator />
+        {user ? <AppNavigator /> : <AuthNavigator />}
       </NavigationContainer>
-    </>
+    </AuthContext.Provider>
   );
 }
 
