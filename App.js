@@ -9,12 +9,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
-// import WelcomeScreen from './screens/WelcomeScreen';
-// import ViewImageScreen from './screens/ViewImageScreen';
-// import MessagesScreen from './screens/MessagesScreen';
-// import ListingDetailsScreen from './screens/ListingDetailsScreen';
-// import LoginScreen from './screens/LoginScreen';
-// import ListingsScreen from './screens/ListingsScreen';
 import AccountScreen from './screens/AccountScreen';
 import ListingEditScreen from './screens/ListingEditScreen';
 
@@ -26,6 +20,7 @@ import OfflineNotice from './components/OfflineNotice';
 import AuthNavigator from './navigation/AuthNavigator';
 import AuthContext from './auth/context';
 import authStorage from './auth/storage';
+import { navigationRef } from './navigation/rootNavigation';
 
 
 const Tab = createBottomTabNavigator();
@@ -60,10 +55,11 @@ export default function App() {
   if (!isReady)
     return <AppLoading startAsync={restoreUser} onFinish={() => setIsReady(true)} onError={console.warn} />
 
+
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <OfflineNotice />
-      <NavigationContainer theme={NavigationTheme}>
+      <NavigationContainer ref={navigationRef} theme={NavigationTheme}>
         {user ? <AppNavigator /> : <AuthNavigator />}
       </NavigationContainer>
     </AuthContext.Provider>
