@@ -23,11 +23,18 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.sugam.merobazaar",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": "React Native Application to sell used stuffs"
+    "description": "React Native Application to sell used stuffs",
+      "extra": {
+        "bugsnag": {
+          "apiKey": "9e4b96fcc3a09f22e340b9db70e1dc3b"
+        }
+      }
   }
 }
